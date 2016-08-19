@@ -39,5 +39,10 @@ do
     echo "${privateIp}:54321" >> ${flatfileName}
 done
 
+echo "Running h2o.jar"
+totalm=$(free -m | awk '/^Mem:/{print $2}')
+
+nohup java -Xmx${totalm}m -jar h2o.jar > /dev/null 2>&1 &
+
 echo Success.
 
