@@ -8,4 +8,6 @@ Deploys a H2O cluster in Azure , using ARM template
     <img src="http://armviz.io/visualizebutton.png"/>
 </a>
 
-This template creates a 'n' node H2O cluster using Linux Datascience VMs. Use the scaleNumber parameter to specify the number of nodes in the cluster.
+This template creates a 'n' node H2O cluster using <a href="https://azure.microsoft.com/en-us/documentation/articles/machine-learning-data-science-linux-dsvm-intro/" target="_blank"> Linux Datascience VMs</a>. Use the scaleNumber parameter to specify the number of nodes in the cluster.
+
+It uses DS_v2 type (<a href="https://azure.microsoft.com/en-us/documentation/articles/storage-premium-storage/" target="_blank">Premiun Storage SSD drives</a>) virtual machines for CPU and I/O intensive workloads.
