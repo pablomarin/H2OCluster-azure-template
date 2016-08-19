@@ -87,7 +87,7 @@
     "subnet1Prefix": "10.0.0.0/24",
     "nicName": "h2oNIC",
     "subnet1Ref": "[concat(variables('vnetID'),'/subnets/', variables('subnet1Name'))]",
-    "customScriptFilePath": "https://github.com/pablomarin/h2o-azure-template/blob/master/download_h2o.sh",
+    "customScriptFilePath": "https://raw.githubusercontent.com/pablomarin/h2o-azure-template/master/download_h2o.sh",
     "customScriptCommandToExecute": "sh download_h2o.sh",
     "vmExtensionName": "h2oExtension",
     "domainNameLabel": "[concat('h2ocluster-', uniqueString(deployment().name))]"
