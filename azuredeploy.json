@@ -1,6 +1,6 @@
 {
   "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-  "contentVersion": "1.0.0.0",
+  "contentVersion": "1.0.0.1",
   "parameters": {
     "storageAccountType": {
       "type": "string",
@@ -115,7 +115,7 @@
       "name": "[concat('publicIP', copyIndex())]",
       "location": "[resourceGroup().location]",
       "copy": {
-        "name": "foo",
+        "name": "h2o-pip-loop",
         "count": "[parameters('scaleNumber')]"
       },
       "properties": {
@@ -152,7 +152,7 @@
       "apiVersion": "2015-05-01-preview",
       "location": "[resourceGroup().location]",
       "copy": {
-        "name": "foo",
+        "name": "h2o-nsg-loop",
         "count": "[parameters('scaleNumber')]"
       },
       "properties": {
@@ -179,7 +179,7 @@
       "name": "[concat(variables('nicName'), copyIndex())]",
       "location": "[resourceGroup().location]",
       "copy": {
-        "name": "foo",
+        "name": "h2o-nic-loop",
         "count": "[parameters('scaleNumber')]"
       },
       "dependsOn": [
@@ -211,7 +211,7 @@
       "name": "[concat(parameters('vmName'), '-', copyIndex())]",
       "location": "[resourceGroup().location]",
       "copy": {
-        "name": "foo",
+        "name": "h2o-vm-loop",
         "count": "[parameters('scaleNumber')]"
       },
       "dependsOn": [
@@ -263,15 +263,15 @@
     },
     {
       "type": "Microsoft.Compute/virtualMachines/extensions",
-      "name": "[concat(parameters('vmName'), copyIndex(),'/', variables('vmExtensionName'))]",
+      "name": "[concat(parameters('vmName'), '-', copyIndex(), '/', variables('vmExtensionName'))]",
       "apiVersion": "2015-05-01-preview",
       "location": "[resourceGroup().location]",
       "copy": {
-        "name": "h2oloop",
+        "name": "h2o-ext-loop",
         "count": "[parameters('scaleNumber')]"
       },
       "dependsOn": [
-        "[concat('Microsoft.Compute/virtualMachines/', parameters('vmName'), copyIndex())]"
+        "[concat('Microsoft.Compute/virtualMachines/', parameters('vmName'), '-', copyIndex())]"
       ],
       "properties": {
         "publisher": "Microsoft.OSTCExtensions",
