@@ -13,7 +13,7 @@
         "Premium_LRS"
       ],
       "metadata": {
-        "description": "Storage Account type"
+        "description": "Storage Account type. DS-series VMs must be deployed in Premium_LRS in order to have an SSD OS disk."
       }
     },
     "vmName": {
