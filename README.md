@@ -26,7 +26,7 @@ This template lets you select from DS_v2 VM types (<a href="https://azure.micros
 - Java heap size is set to the 90% of RAM available. If you need to use less heap size on the driver node (H2O-0), you must stop H2O and launching it again with less heap memory, by doing this
 
 	> killall -q -v java <br>
-	> nohup java -Xmx<WHAT-YOU-WANT>m -jar /dsvm/tools/h2o.jar -flatfile /dsvm/tools/flatfile.txt
+	> nohup java -Xmx[WHAT-YOU-WANT]m -jar /dsvm/tools/h2o.jar -flatfile /dsvm/tools/flatfile.txt
 	
 
 ### Base VM image - DSVM
