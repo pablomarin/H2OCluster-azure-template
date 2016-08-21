@@ -10,7 +10,7 @@
 This template creates a 'n' node H2O cluster using <a href="https://azure.microsoft.com/en-us/documentation/articles/machine-learning-data-science-linux-dsvm-intro/" target="_blank"> Linux Datascience VMs</a> as the image for the base nodes.
 Use the <b>scaleNumber</b> parameter to specify the number of nodes in the cluster.
 
-This template will automatically: download the latest stable version of H2O on each node (at */dsvm/tools* folder) and run the h2o.jar.
+This template will automatically: download the latest stable version of H2O on each node (at */dsvm/tools* folder), installs H2O for R and Python, and run the h2o.jar.
 
 Once the deployment finishes creating, it is recommended to the use 1st VM (H2O-0) as the front-end (driver) VM where you can:
 
