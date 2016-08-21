@@ -51,9 +51,13 @@ pip install https://s3.amazonaws.com/h2o-release/h2o/${h2oBranch}/${h2oBuild}/Py
 wait
 
 echo "Running h2o.jar"
-totalm=$(free -m | awk '/^Mem:/{print $2}')
+# Use 90% of RAM for H2O.
+memTotalKb=`cat /proc/meminfo | grep MemTotal | sed 's/MemTotal:[ \t]*//' | sed 's/ kB//'`
+memTotalMb=$[ $memTotalKb / 1024 ]
+tmp=$[ $memTotalMb * 90 ]
+xmxMb=$[ $tmp / 100 ]
 
-nohup java -Xmx${totalm}m -jar h2o.jar -flatfile flatfile.txt > /dev/null 2>&1 &
+nohup java -Xmx${xmxMb}m -jar h2o.jar -flatfile flatfile.txt 1> /dev/null 2> h2o.err &
 
 echo Success.
 
