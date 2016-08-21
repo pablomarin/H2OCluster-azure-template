@@ -75,7 +75,7 @@
       "type": "int",
       "defaultValue": 3,
       "metadata": {
-        "description": "Number of Zookeeper nodes to provision"
+        "description": "Number of h2o nodes to provision"
       }
     }
   },
