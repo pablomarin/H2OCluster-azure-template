@@ -22,6 +22,7 @@ This template lets you select from DS_v2 VM types (<a href="https://azure.micros
 <b>Important Notes </b>:<br>
 - OS Disk by default is small (approx 30GB), this means that you have around 16GB of free space to start with. This is the same for all VM sizes. It is recommended that you add a SSD data disk to the driver node (H2O-0) by following these instructions: https://azure.microsoft.com/en-us/documentation/articles/virtual-machines-linux-classic-attach-disk/
 - Pick a VM size that provides RAM of at least 4x the size of your dataset. Azure VM sizes: https://azure.microsoft.com/en-us/pricing/details/virtual-machines/
+- Be aware that Azure subscriptions by default allow only 20 cores. If you get a Validation error on template deployment, this might be the cause.
 - Java heap size is set to the 90% of RAM available. If you need to use less heap size on the driver node (H2O-0), you must stop H2O and launching it again with less heap memory, by doing this
 
 	> killall -q -v java <br>
