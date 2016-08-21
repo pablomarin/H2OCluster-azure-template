@@ -1,6 +1,9 @@
 #!/bin/bash
 set -e
 
+echo "Changing to dsvm/tools folder ..."
+cd /dsvm/tools/
+wait 
 
 # Adjust based on the build of H2O you want to download.
 h2oBranch=rel-turing
