@@ -1,11 +1,9 @@
 #!/bin/bash
-#AWS_SSH_PRIVATE_KEY_FILE=''
-echo $AWS_SSH_PRIVATE_KEY_FILE
-
 set -e
 
+
 # Adjust based on the build of H2O you want to download.
-h2oBranch=rel-turchin
+h2oBranch=rel-turing
 
 echo "Fetching latest build number for branch ${h2oBranch}..."
 curl --silent -o latest https://h2o-release.s3.amazonaws.com/h2o/${h2oBranch}/latest
@@ -25,7 +23,7 @@ echo "Unzipping h2o.jar ..."
 unzip -o h2o-${h2oVersion}.zip 1> /dev/null &
 wait
 
-echo "Copying h2o.jar within node ${i}: ${publicDnsName}"
+echo "Copying h2o.jar within node ..."
 cp -f h2o-${h2oVersion}/h2o.jar . &
 wait
 
