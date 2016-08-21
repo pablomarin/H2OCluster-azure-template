@@ -1,5 +1,4 @@
-# h2o-azure-template
-Deploys a H2O cluster in Azure , using ARM template
+# Azure ARM Template to create a H2O Cluster with N nodes on Linux Data Science VMs
 
 <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fpablomarin%2Fh2o-azure-template%2Fmaster%2Fazuredeploy.json" target="_blank">
     <img src="http://azuredeploy.net/deploybutton.png"/>
