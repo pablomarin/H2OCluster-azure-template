@@ -47,6 +47,7 @@ R --slave -e 'install.packages("h2o", type="source", repos=(c("https://s3.amazon
 wait 
 
 echo "Installing H2O for Python"
+ln -s /anaconda/bin/pip /usr/bin/pip
 pip install https://s3.amazonaws.com/h2o-release/h2o/${h2oBranch}/${h2oBuild}/Python/h2o-${h2oVersion}-py2.py3-none-any.whl
 wait
 
