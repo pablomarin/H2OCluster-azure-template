@@ -20,6 +20,12 @@ Once the deployment finishes creating, it is recommended to the use 1st VM (H2O-
 
 This template lets you select from DS_v2 VM types (<a href="https://azure.microsoft.com/en-us/documentation/articles/storage-premium-storage/" target="_blank">Premiun Storage SSD drives</a>) for CPU and I/O intensive workloads.
 
+<b>Important Notes </b>:<br>
+- OS Disk by default is small (approx 30GB), this means that you have around 16GB of free space to start with. This is the same for all VM sizes. It is recommended that you add a SSD data disk to the driver node (H2O-0) by following this instructions: https://azure.microsoft.com/en-us/documentation/articles/virtual-machines-linux-classic-attach-disk/
+- Pick a VM size that provides RAM of at least 4x the size of your dataset. This is the types of DS_v2 sizes: https://azure.microsoft.com/en-us/pricing/details/virtual-machines/
+
+### Base VM image - DSVM
+
 The Linux Data Science Virtual Machine is ideal to use as a base for H2O because it comes with a collection of tools pre-installed that are commonly used for doing data analytics and machine learning. The key software components included are:
 
 - Microsoft R Open
