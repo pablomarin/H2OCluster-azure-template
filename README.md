@@ -11,7 +11,7 @@ Deploys a H2O cluster in Azure , using ARM template
 This template creates a 'n' node H2O cluster using <a href="https://azure.microsoft.com/en-us/documentation/articles/machine-learning-data-science-linux-dsvm-intro/" target="_blank"> Linux Datascience VMs</a> as the image for the base nodes.
 Use the <b>scaleNumber</b> parameter to specify the number of nodes in the cluster.
 
-This template will automatically: download the latest stable version of H2O on each node (at */dsvm/tools* folfer) and run the h2o.jar with the max amount of RAM available on the each node.
+This template will automatically: download the latest stable version of H2O on each node (at */dsvm/tools* folfer) and run the h2o.jar.
 
 Once the deployment finishes creating, it is recommended to the use 1st VM (H2O-0) as the front end VM where you can:
 
@@ -23,6 +23,11 @@ This template lets you select from DS_v2 VM types (<a href="https://azure.micros
 <b>Important Notes </b>:<br>
 - OS Disk by default is small (approx 30GB), this means that you have around 16GB of free space to start with. This is the same for all VM sizes. It is recommended that you add a SSD data disk to the driver node (H2O-0) by following these instructions: https://azure.microsoft.com/en-us/documentation/articles/virtual-machines-linux-classic-attach-disk/
 - Pick a VM size that provides RAM of at least 4x the size of your dataset. Azure VM sizes: https://azure.microsoft.com/en-us/pricing/details/virtual-machines/
+- Java heap size is set to the 90% of RAM available. If you need to use less heap size on the driver node (H2O-0), you must stop H2O and launching it again with less heap memory, by doing this
+
+	> killall -q -v java <br>
+	> nohup java -Xmx<WHAT-YOU-WANT>m -jar /dsvm/tools/h2o.jar -flatfile /dsvm/tools/flatfile.txt
+	
 
 ### Base VM image - DSVM
 
@@ -71,13 +76,13 @@ Since we have both Python 2.7 and 3.5, you need to specifically activate the des
 
 To activate Python 2.7, run the following from the shell:
 
-	source /anaconda/bin/activate root
+	 /anaconda/bin/activate root
 
 Python 2.7 is installed at */anaconda/bin*. 
 
 To activate Python 3.5, run the following from the shell:
 
-	source /anaconda/bin/activate py35
+	/anaconda/bin/activate py35
 
 
 Python 3.5 is installed at */anaconda/envs/py35/bin*
