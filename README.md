@@ -8,9 +8,15 @@ Deploys a H2O cluster in Azure , using ARM template
     <img src="http://armviz.io/visualizebutton.png"/>
 </a>
 
-This template creates a 'n' node H2O cluster using <a href="https://azure.microsoft.com/en-us/documentation/articles/machine-learning-data-science-linux-dsvm-intro/" target="_blank"> Linux Datascience VMs</a>. Use the <b>scaleNumber</b> parameter to specify the number of nodes in the cluster.
+This template creates a 'n' node H2O cluster using <a href="https://azure.microsoft.com/en-us/documentation/articles/machine-learning-data-science-linux-dsvm-intro/" target="_blank"> Linux Datascience VMs</a> as the image for the base nodes.
+Use the <b>scaleNumber</b> parameter to specify the number of nodes in the cluster.
 
-This template will automatically: download the latest stable version of H2O on each node and run the h2o.jar with the max amount of RAM available on the each node.
+This template will automatically: download the latest stable version of H2O on each node (at */dsvm/tools* folfer) and run the h2o.jar with the max amount of RAM available on the each node.
+
+Once the deployment finishes creating, it is recommended to the use 1st VM (H2O-0) as the front end VM where you can:
+
+1) Connect to <b> H2O Flow</b> by going to *http://\<VM DNS name or IP Address of H2O-0 node\>:54321/*</br>
+2) Connect to <b>Jupyter Notebook</b> by going to *https://\<VM DNS name or IP Address of H2O-0 node\>:8000/*
 
 This template lets you select from DS_v2 VM types (<a href="https://azure.microsoft.com/en-us/documentation/articles/storage-premium-storage/" target="_blank">Premiun Storage SSD drives</a>) for CPU and I/O intensive workloads.
 
