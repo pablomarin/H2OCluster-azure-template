@@ -12,7 +12,7 @@ Use the <b>scaleNumber</b> parameter to specify the number of nodes in the clust
 
 This template will automatically: download the latest stable version of H2O on each node (at */dsvm/tools* folder), installs H2O for R and Python, and run the h2o.jar.
 
-Once the deployment finishes creating, it is recommended to the use 1st VM (H2O-0) as the front-end (driver) VM where you can:
+Once the deployment finishes creating, it is recommended to use the 1st VM (H2O-0) as the front-end (driver) VM where you can:
 
 1) Connect to <b> H2O Flow</b> by going to *http://\<VM DNS name or IP Address of H2O-0 node\>:54321/*</br>
 2) Connect to <b>Jupyter Notebook</b> by going to *https://\<VM DNS name or IP Address of H2O-0 node\>:8000/*
