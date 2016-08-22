@@ -30,6 +30,8 @@ SYNOPSYS
 
     To run this script, download the file azuredeploy.json from the url
     https://github.com/pablomarin/H2OCluster-azure-template/blob/master/azuredeploy.json
+    or run this command in powershell:
+    curl -OutFile DeployAzureRmH2oCluster.ps1 https://raw.githubusercontent.com/pablomarin/H2OCluster-azure-template/master/DeployAzureRmH2oCluster.ps1
 #>
 
 ##########################
