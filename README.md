@@ -80,13 +80,13 @@ Since we have both Python 2.7 and 3.5, you need to specifically activate the des
 
 To activate Python 2.7, run the following from the shell:
 
-	 /anaconda/bin/activate root
+	 $ source /anaconda/bin/activate root
 
 Python 2.7 is installed at */anaconda/bin*. 
 
 To activate Python 3.5, run the following from the shell:
 
-	/anaconda/bin/activate py35
+	$ source /anaconda/bin/activate py35
 
 
 Python 3.5 is installed at */anaconda/envs/py35/bin*
