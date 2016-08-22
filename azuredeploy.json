@@ -32,7 +32,7 @@
     },
     "adminUserName": {
       "type": "string",
-      "defaultValue": "h2oadmin",
+      "defaultValue": "admin",
       "metadata": {
         "description": "Admin username"
       }
