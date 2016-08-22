@@ -53,14 +53,6 @@ echo "Installing H2O for Python..."
 pip install https://s3.amazonaws.com/h2o-release/h2o/${h2oBranch}/${h2oBuild}/Python/h2o-${h2oVersion}-py2.py3-none-any.whl
 pip3 install https://s3.amazonaws.com/h2o-release/h2o/${h2oBranch}/${h2oBuild}/Python/h2o-${h2oVersion}-py2.py3-none-any.whl
 
-echo "Upgrading XGBoost to the latest version..."
-pip install -U xgboost
-pip3 install -U xgboost
-
-echo "Installing Keras..."
-pip install -U keras
-pip3 install -U keras
-
 echo "Running h2o.jar"
 # Use 90% of RAM for H2O.
 memTotalKb=`cat /proc/meminfo | grep MemTotal | sed 's/MemTotal:[ \t]*//' | sed 's/ kB//'`
