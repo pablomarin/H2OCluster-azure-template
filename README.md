@@ -19,6 +19,10 @@ Once the deployment finishes creating, it is recommended to use the 1st VM (H2O-
 
 This template lets you select from DS_v2 VM types (<a href="https://azure.microsoft.com/en-us/documentation/articles/storage-premium-storage/" target="_blank">Premiun Storage SSD drives</a>) for CPU and I/O intensive workloads.
 
+###2 ways to deploy:<br>
+- <b>Using Azure Portal</b>: Click the "Deploy to Azure" button above.
+- <b>Using Powershell</b>: Download the script "DeployAzureRmH2oCluster.ps1" and the json template "azuredeploy.json" to a folder on your windows machine, run the script and follow the prompts.
+
 <b>Important Notes </b>:<br>
 - OS Disk by default is small (approx 30GB), this means that you have around 16GB of free space to start with. This is the same for all VM sizes. It is recommended that you add a SSD data disk to the driver node (H2O-0) by following these instructions: https://azure.microsoft.com/en-us/documentation/articles/virtual-machines-linux-classic-attach-disk/
 - Pick a VM size that provides RAM of at least 4x the size of your dataset. Azure VM sizes: https://azure.microsoft.com/en-us/pricing/details/virtual-machines/
