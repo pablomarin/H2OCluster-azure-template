@@ -13,13 +13,6 @@
         "description": "Storage Account type. DS-series VMs must be deployed in Premium_LRS in order to have an SSD OS disk."
       }
     },
-    "vmName": {
-      "type": "string",
-      "defaultValue": "H2O",
-      "metadata": {
-        "description": "VM name"
-      }
-    },
     "vmSize": {
       "type": "string",
       "allowedValues": [
@@ -35,27 +28,6 @@
       ],
       "metadata": {
         "description": "Size of the VM"
-      }
-    },
-    "imagePublisher": {
-      "type": "string",
-      "defaultValue": "microsoft-ads",
-      "metadata": {
-        "description": "Image Publisher"
-      }
-    },
-    "imageOffer": {
-      "type": "string",
-      "defaultValue": "linux-data-science-vm",
-      "metadata": {
-        "description": "Image Offer"
-      }
-    },
-    "imageSKU": {
-      "type": "string",
-      "defaultValue": "linuxdsvm",
-      "metadata": {
-        "description": "Image SKU"
       }
     },
     "adminUserName": {
@@ -80,6 +52,10 @@
     }
   },
   "variables": {
+    "vmName": "H2O",
+    "imagePublisher": "microsoft-ads",
+    "imageOffer": "linux-data-science-vm",
+    "imageSKU": "linuxdsvm",
     "storageAccountName": "[concat(uniquestring(resourceGroup().id), 'h2o')]",
     "availabilitySetName": "h2oAvSet",
     "networkSecurityGroupName": "h2oNSG",
@@ -212,7 +188,7 @@
     {
       "apiVersion": "2015-05-01-preview",
       "type": "Microsoft.Compute/virtualMachines",
-      "name": "[concat(parameters('vmName'), '-', copyIndex())]",
+      "name": "[concat(variables('vmName'), '-', copyIndex())]",
       "location": "[resourceGroup().location]",
       "copy": {
         "name": "h2o-vm-loop",
@@ -224,9 +200,9 @@
         "[concat('Microsoft.Compute/availabilitySets/', variables('availabilitySetName'))]"
       ],
       "plan": {
-        "name": "[parameters('imageSKU')]",
-        "publisher": "[parameters('imagePublisher')]",
-        "product": "[parameters('imageOffer')]"
+        "name": "[variables('imageSKU')]",
+        "publisher": "[variables('imagePublisher')]",
+        "product": "[variables('imageOffer')]"
       },
       "properties": {
         "availabilitySet": {
@@ -236,21 +212,21 @@
           "vmSize": "[parameters('vmSize')]"
         },
         "osProfile": {
-          "computername": "[concat(parameters('vmName'), '-', copyIndex())]",
+          "computername": "[concat(variables('vmName'), '-', copyIndex())]",
           "adminUsername": "[parameters('adminUserName')]",
           "adminPassword": "[parameters('adminPassword')]"
         },
         "storageProfile": {
           "imageReference": {
-            "publisher": "[parameters('imagePublisher')]",
-            "offer": "[parameters('imageOffer')]",
-            "sku": "[parameters('imageSKU')]",
+            "publisher": "[variables('imagePublisher')]",
+            "offer": "[variables('imageOffer')]",
+            "sku": "[variables('imageSKU')]",
             "version": "latest"
           },
           "osDisk": {
             "name": "osdisk",
             "vhd": {
-              "uri": "[concat('http://', variables('storageAccountName'), '.blob.core.windows.net/vhds/', uniqueString(deployment().name), '-', parameters('vmName'), copyindex(), '.vhd')]"
+              "uri": "[concat('http://', variables('storageAccountName'), '.blob.core.windows.net/vhds/', uniqueString(deployment().name), '-', variables('vmName'), copyindex(), '.vhd')]"
             },
             "caching": "ReadWrite",
             "createOption": "FromImage"
@@ -267,7 +243,7 @@
     },
     {
       "type": "Microsoft.Compute/virtualMachines/extensions",
-      "name": "[concat(parameters('vmName'), '-', copyIndex(), '/', variables('vmExtensionName'))]",
+      "name": "[concat(variables('vmName'), '-', copyIndex(), '/', variables('vmExtensionName'))]",
       "apiVersion": "2015-05-01-preview",
       "location": "[resourceGroup().location]",
       "copy": {
@@ -275,7 +251,7 @@
         "count": "[parameters('scaleNumber')]"
       },
       "dependsOn": [
-        "[concat('Microsoft.Compute/virtualMachines/', parameters('vmName'), '-', copyIndex())]"
+        "[concat('Microsoft.Compute/virtualMachines/', variables('vmName'), '-', copyIndex())]"
       ],
       "properties": {
         "publisher": "Microsoft.OSTCExtensions",
