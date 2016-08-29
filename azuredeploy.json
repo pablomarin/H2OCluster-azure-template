@@ -70,7 +70,7 @@
     "customScriptFilePath": "https://raw.githubusercontent.com/pablomarin/h2o-azure-template/master/download_h2o.sh",
     "customScriptCommandToExecute": "[concat('sh download_h2o.sh ', parameters('scaleNumber'))]",
     "vmExtensionName": "h2oExtension",
-    "domainNameLabel": "[concat('h2ocluster-', uniqueString(deployment().id))]"
+    "domainNameLabel": "[concat('h2ocluster-', uniqueString(resourceGroup().id))]"
   },
   "resources": [
     {
@@ -226,7 +226,7 @@
           "osDisk": {
             "name": "osdisk",
             "vhd": {
-              "uri": "[concat('http://', variables('storageAccountName'), '.blob.core.windows.net/vhds/', uniqueString(deployment().id), '-', variables('vmName'), copyindex(), '.vhd')]"
+              "uri": "[concat('http://', variables('storageAccountName'), '.blob.core.windows.net/vhds/', uniqueString(resourceGroup().id), '-', variables('vmName'), copyindex(), '.vhd')]"
             },
             "caching": "ReadWrite",
             "createOption": "FromImage"
