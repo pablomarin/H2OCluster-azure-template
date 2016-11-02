@@ -261,7 +261,7 @@
           "fileUris": [
             "[variables('customScriptFilePath')]"
           ],
-          "commandToExecute": "[concat(variables('customScriptCommandToExecute'), ' ', parameters('scaleNumber'))]"
+          "commandToExecute": "[concat(variables('customScriptCommandToExecute'), ' ', parameters('scaleNumber'), ' ', parameters('adminUserName'))]"
         }
       }
     }
