@@ -66,7 +66,7 @@ memTotalMb=$[ $memTotalKb / 1024 ]
 tmp=$[ $memTotalMb * 90 ]
 xmxMb=$[ $tmp / 100 ]
 
-nohup java -Xmx${xmxMb}m -jar h2o.jar -flatfile flatfile.txt 1> /dev/null 2> h2o.err &
+nohup java -Xmx${xmxMb}m -jar /dsvm/tools/h2o.jar -flatfile /dsvm/tools/flatfile.txt 1> /dev/null 2> h2o.err &
 
 echo Success.
 
