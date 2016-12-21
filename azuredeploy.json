@@ -40,7 +40,7 @@
     "adminPassword": {
       "type": "securestring",
       "metadata": {
-        "description": "Admin password"
+        "description": "Admin password - 10 characters long or more"
       }
     },
     "scaleNumber": {
@@ -76,7 +76,7 @@
     {
       "type": "Microsoft.Storage/storageAccounts",
       "name": "[variables('storageAccountName')]",
-      "apiVersion": "2015-05-01-preview",
+      "apiVersion": "2015-06-15",
       "location": "[resourceGroup().location]",
       "properties": {
         "accountType": "[parameters('storageAccountType')]"
@@ -85,12 +85,12 @@
     {
       "type": "Microsoft.Compute/availabilitySets",
       "name": "[variables('availabilitySetName')]",
-      "apiVersion": "2015-05-01-preview",
+      "apiVersion": "2015-06-15",
       "location": "[resourceGroup().location]",
       "properties": { }
     },
     {
-      "apiVersion": "2015-05-01-preview",
+      "apiVersion": "2016-09-01",
       "type": "Microsoft.Network/publicIPAddresses",
       "name": "[concat('publicIP', copyIndex())]",
       "location": "[resourceGroup().location]",
@@ -106,7 +106,7 @@
       }
     },
     {
-      "apiVersion": "2015-05-01-preview",
+      "apiVersion": "2016-09-01",
       "type": "Microsoft.Network/virtualNetworks",
       "name": "[variables('virtualNetworkName')]",
       "location": "[resourceGroup().location]",
@@ -129,7 +129,7 @@
     {
       "type": "Microsoft.Network/networkSecurityGroups",
       "name": "[concat(variables('networkSecurityGroupName'), copyIndex())]",
-      "apiVersion": "2015-05-01-preview",
+      "apiVersion": "2016-09-01",
       "location": "[resourceGroup().location]",
       "copy": {
         "name": "h2o-nsg-loop",
@@ -154,7 +154,7 @@
       }
     },
     {
-      "apiVersion": "2015-05-01-preview",
+      "apiVersion": "2016-09-01",
       "type": "Microsoft.Network/networkInterfaces",
       "name": "[concat(variables('nicName'), copyIndex())]",
       "location": "[resourceGroup().location]",
@@ -186,7 +186,7 @@
       }
     },
     {
-      "apiVersion": "2015-05-01-preview",
+      "apiVersion": "2015-06-15",
       "type": "Microsoft.Compute/virtualMachines",
       "name": "[concat(variables('vmName'), '-', copyIndex())]",
       "location": "[resourceGroup().location]",
@@ -230,7 +230,17 @@
             },
             "caching": "ReadWrite",
             "createOption": "FromImage"
-          }
+          },
+          "dataDisks": [
+              {
+                "name": "[concat(variables('vmName'), '-', copyIndex(), '-disk-1')]",
+                "createOption": "fromImage",
+                "lun": 0,
+                "vhd": {
+                    "uri": "[concat(concat(reference(resourceId(resourceGroup().name, 'Microsoft.Storage/storageAccounts', variables('storageAccountName')), '2015-06-15').primaryEndpoints['blob'], 'vhds/'), uniqueString(resourceGroup().id), '-', variables('vmName'), copyindex(), '-disk-1', '.vhd')]"
+                }
+            }
+          ]
         },
         "networkProfile": {
           "networkInterfaces": [
@@ -244,7 +254,7 @@
     {
       "type": "Microsoft.Compute/virtualMachines/extensions",
       "name": "[concat(variables('vmName'), '-', copyIndex(), '/', variables('vmExtensionName'))]",
-      "apiVersion": "2015-05-01-preview",
+      "apiVersion": "2015-06-15",
       "location": "[resourceGroup().location]",
       "copy": {
         "name": "h2o-ext-loop",
