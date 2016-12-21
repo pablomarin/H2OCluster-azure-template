@@ -6,7 +6,6 @@
       "type": "string",
       "defaultValue": "Premium_LRS",
       "allowedValues": [
-        "Standard_LRS",
         "Premium_LRS"
       ],
       "metadata": {
